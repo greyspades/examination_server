@@ -1,5 +1,10 @@
 namespace Student.Models;
 
+public class IdDTO {
+    public string? Id { get; set; }
+    public string? Support { get; set; }
+}
+
 public class BasicInfo {
     public string? Id { get; set; }
     public string? FirstName { get; set; }
@@ -10,8 +15,6 @@ public class BasicInfo {
     public string? LivesWith { get; set; }
     public string? Email { get; set; }
     public string? Gender { get; set; }
-    public string? CurrSchool { get; set; }
-    public string? LastSchool { get; set; }
     public string? Phone { get; set; }
     public string? Religion { get; set; }
 }
@@ -26,7 +29,6 @@ public class ParentsInfo {
     public string? MothersWorkAddress { get; set; }
     public string? FathersHomeAddress { get; set; }
     public string? MothersHomeAddress { get; set; }
-    public string? NumberOfWives { get; set; }
     public string? NumberOfChildren { get; set; }
 }
 
@@ -40,6 +42,11 @@ public class EducationDto {
     public List<EducationInfo>? Data { get; set; }
 }
 
+public class ExamDetails {
+    public bool? Approved { get; set; }
+    public string? Cert { get; set; }
+}
+
 public class EducationInfo {
     public string? Id { get; set; }
     public string? School { get; set; }
@@ -47,6 +54,7 @@ public class EducationInfo {
     public string? Cert { get; set; }
     public DateTime? StartDate { get; set; }
     public DateTime? EndDate { get; set; }
+    public bool? currentSchool { get; set; }
 }
 public class StudentData {
     public string? Id { get; set; }
@@ -61,6 +69,10 @@ public class StudentData {
     public string? Email { get; set; }
     public string? Phone { get; set; }
     public string? Passport { get; set; }
+    public bool? Registered { get; set; }
+    public bool? Approved { get; set; }
+    public string? Status { get; set; }
+    public string? ExamId { get; set; }
 }
 
 public class Documents {
@@ -78,30 +90,26 @@ public class Documents {
 
 
 public class DocumentsDto {
-    public string? Id { get; set ; }
-    public string? FirstResult { get; set ; }
-    public string? SecondResult { get; set ; }
-    public string? ThirdResult { get; set ; }
-    public string? AccountCard { get; set ; }
-    public string? Passport { get; set ; }
-    public string? MembershipCard { get; set ; }
-    public string? BirthCert { get; set ; }
-    public string? Attestation { get; set ; }
+    public string? Id { get; set; }
+    public string? Path { get; set; }
+    public string? Name { get; set; }
+    public string? FileId { get; set; }
+    public string? Extension { get; set; }
 }
 
 public class BankingInfo {
     public string? Id { get; set; }
-    public string? MpkNo { get; set; }
+    public string? MpkAccNo { get; set; }
     public string? BranchManager { get; set; }
     public string? Area { get; set; }
     public string? AccountName { get; set; }
-    public string? BranchName { get; set; }
-    public string? AccountUnion { get; set; }
+    public string? Branch { get; set; }
+    public string? Zone { get; set; }
 }
-
 public class Document {
     public string? Name { get; set; }
     public string? Id { get; set; }
+    public string? Extension { get; set; }
 }
 
 public class StudentDto {
@@ -113,4 +121,33 @@ public class StudentDto {
     public Documents? Documents { get; set; }
     public DocumentsDto? Docs { get; set; }
     public BankingInfo? Banking { get; set; }
+}
+
+public class EmailDto {
+    public string? subject { get; set; }
+    public string? emailaddress { get; set; }
+    public string? body { get; set; }
+    public string? hasFile { get; set; }
+}
+
+public class AccountInfo
+{
+    public string? account_number { get; set; }
+    public string? account_name { get; set; }
+    public string? branch_code { get; set; }
+    public string? branch_name { get; set; }
+    public string? customer_number { get; set; }
+    public string? bank_verification_number { get; set; }
+    public string? account_type { get; set; }
+    public string? account_class { get; set; }
+    public string? account_status { get; set; }
+    public string? gender { get; set; }
+    public string? primary_phone_number { get; set; }
+    public string? primary_email_address { get; set; }
+    public string? primary_physical_address { get; set; }
+}
+
+public class DeclineDto {
+    public string? Id { get; set; }
+    public string? Reason { get; set; }
 }

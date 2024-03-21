@@ -75,3 +75,12 @@ C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\System.Security.Crypt
 C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\DevOne.Security.Cryptography.BCrypt.dll
 C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\BCrypt.Net-Next.dll
+C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\SCHOLARSHIP.staticwebassets.runtime.json
+C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\Aspose.PDF.dll
+C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
+C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

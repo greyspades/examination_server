@@ -26,6 +26,7 @@ public class QuestionModel {
     public string? Bank { get; set; }
     public string? Instructions { get; set; }
     public string? Subject { get; set; }
+    public string? Class { get; set; }
 }
 public enum SubjectScope {JUNIOR, SENIOR}
 public class Subject {
@@ -40,4 +41,37 @@ public class QuestionBank {
     public string? Id { get; set; }
     public string? Description { get; set; }
     public bool? IsDefault { get; set; }
+}
+
+public class ExamQuestionsDTO {
+    public string? Id { get; set; }
+    public string? Subject { get; set; }
+    public string? Class { get; set; }
+    public int? Index { get; set; }
+}
+
+public class UploadQuestionDto {
+    public string? Subject { get; set; }
+    public string? Class { get; set; }
+    public IFormFile? Excel { get; set; }
+}
+public class AnswersDto {
+    public string? Id { get; set; }
+    public string? Class { get; set; }
+    public List<AnswerDto>? Answers { get; set; }
+}
+public class AnswerDto {
+    // public string? Id { get; set; }
+    public string? Question { get; set; }
+    public string? Subject { get; set; }
+    public string? Value { get; set; }
+}
+public class AnswerModel {
+    public string? Id { get; set; }
+    public string? Answer { get; set; }
+}
+public class Result {
+    public string? Id { get; set; }
+    public string? Subject { get; set; }
+    public string? Score { get; set; }
 }

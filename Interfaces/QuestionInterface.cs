@@ -11,5 +11,14 @@ namespace Question.Interface
         public Task CreateSubject(Subject payload);
         public Task<IEnumerable<Subject>> GetSubjects(string scope);
         public Task<IEnumerable<dynamic>> GetQuestions(string subject);
+        public Task UpdateQuestion(QuestionModel payload);
+        public Task UpdateOption(Option payload);
+        public Task DeleteOptions(string Id);
+        public Task<IEnumerable<QuestionModel>> GetExamQuestions(string Subject, string Class);
+        public Task<IEnumerable<Option>> GetExamOptions(string Id);
+        public Task ParseQuestionFromExcell(IFormFile file, string subject, string studentClass);
+        public Task<AnswerModel> GetAnswer(string Id);
+        public Task MarkScore(string Id, string Subject, string scope);
+        public Task CompleteExam(string Id);
     }
 }

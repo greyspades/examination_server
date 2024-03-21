@@ -1,5 +1,6 @@
 using Student.Models;
-
+using Credentials.Models;
+using User.Models;
 namespace Student.Interface
 {
     public interface IStudentRepository
@@ -29,5 +30,21 @@ namespace Student.Interface
         public Task<IEnumerable<StudentAuth>> GetStudentByEmail(string email);
         public Task<IEnumerable<StudentData>> GetPendingVerifications();
         public Task<IEnumerable<DocumentsDto>> GetDocuments(string Id);
+        public Task<string> GetDocumentExtension(string id, string name);
+        public Task ApproveClient(string Id);
+        public Task RejectClient(string Id, string Reason);
+        public Task SaveExcelFile(IFormFile file);
+        public Task<IEnumerable<ExamDetails>> GetExamDetails(string Id);
+        public Task<IEnumerable<dynamic>> GetDashboardDetails(string Id);
+        public Task<dynamic> GetAccountInfo(string accountNumber, CredentialsObj cred);
+        public Task<CredentialsObj> GetCredentials();
+        public Task<string> SendMail(EmailDto payload, CredentialsObj cred);
+        public Task UpdateStatus(string Id, string Status);
+        public Task<IEnumerable<dynamic>> GetCandidates();
+        public Task<Settings> GetSettings();
+        public Task<IEnumerable<dynamic>> GetScoresById(string Id);
+        public Task<dynamic> GetApplicationInfo(string Id);
+        public Task<dynamic> GetMetrics();
+        public Task<IEnumerable<dynamic>> GetAllScores(string Scope);
     }
 }
