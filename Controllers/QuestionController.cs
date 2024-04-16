@@ -347,6 +347,121 @@ namespace Question.Controller
             }
         }
 
+        [HttpPost("draft/save")]
+        public async Task<ActionResult> SaveDraft(Draft payload) {
+            try {
+                var draft = await _repo.GetDraft(payload.Id);
+                if(draft != null) {
+                    await _repo.UpdateDraft(payload);
+                } else {
+                    await _repo.SaveDraft(payload);
+                }
+                
+                return Ok(new {
+                    code = 200,
+                    message = "Draft saved"
+                });
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+
+                using StreamWriter outputFile = new("logs.txt", true);
+
+                await outputFile.WriteAsync(e.Message);
+
+                var response = new
+                {
+                    code = 500,
+                    status = false,
+                    message = "Unnable to complete your request"
+                };
+
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet("draft/{id}")]
+        public async Task<ActionResult> GetDraft(string id) {
+            try {
+                var data = await _repo.GetDraft(id);
+                
+                return Ok(new {
+                    code = 200,
+                    data
+                });
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+
+                using StreamWriter outputFile = new("logs.txt", true);
+
+                await outputFile.WriteAsync(e.Message);
+
+                var response = new
+                {
+                    code = 500,
+                    status = false,
+                    message = "Unnable to complete your request"
+                };
+
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPost("draft/update")]
+        public async Task<ActionResult> UpdateDraft(Draft payload) {
+            try {
+                await _repo.UpdateDraft(payload);
+                
+                return Ok(new {
+                    code = 200,
+                    message = "Draft saved"
+                });
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+
+                using StreamWriter outputFile = new("logs.txt", true);
+
+                await outputFile.WriteAsync(e.Message);
+
+                var response = new
+                {
+                    code = 500,
+                    status = false,
+                    message = "Unnable to complete your request"
+                };
+
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPost("question/single")]
+        public async Task<ActionResult<IEnumerable<QuestionBank>>> GetQuestionBySubject(ExamQuestionsDTO payload) {
+            try {
+                QuestionModel question = await _repo.GetExamQuestion(payload.Subject, payload.Class);
+
+                question.Options = (List<Option>?)await _repo.GetExamOptions(question.Id);
+                
+                return Ok(new {
+                    code = 200,
+                    data = question
+                });
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+
+                using StreamWriter outputFile = new("logs.txt", true);
+
+                await outputFile.WriteAsync(e.Message);
+
+                var response = new
+                {
+                    code = 500,
+                    status = false,
+                    message = "Unnable to complete your request"
+                };
+
+                return StatusCode(500, e.Message);
+            }
+        }
+
         [HttpPost("exam")]
         public async Task<ActionResult<IEnumerable<QuestionBank>>> GetExamQuestions(ExamQuestionsDTO payload) {
             try {
@@ -357,7 +472,6 @@ namespace Question.Controller
                         question.Options = (List<Option>?)await _repo.GetExamOptions(question.Id);
                     }
                 }
-                
                 return Ok(new {
                     code = 200,
                     data
@@ -383,8 +497,7 @@ namespace Question.Controller
         public async Task<ActionResult<IEnumerable<QuestionBank>>> SubmitAnswers(AnswersDto payload) {
             try {
                 foreach(AnswerDto answer in payload.Answers) {
-                    var ans = await _repo.GetAnswer(answer.Question);
-                    Console.WriteLine(payload.Class);
+                var ans = await _repo.GetAnswer(answer.Question);
                 if(ans.Answer == answer.Value) {
                         await _repo.MarkScore(payload.Id, answer.Subject, payload.Class);
                     }

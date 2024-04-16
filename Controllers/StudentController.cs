@@ -570,7 +570,7 @@ namespace Student.Controller
             try {
                 var data = await _repo.GetBankingInfo(payload.Id);
                 CredentialsObj cred = await _repo.GetCredentials();
-                // var details = await _repo.GetAccountInfo(payload.MpkAccNo, cred);
+                var details = await _repo.GetAccountInfo(payload.MpkAccNo, cred);
                 if(data.Any()) {
                     await _repo.UpdateBankingInfo(payload);
 
@@ -586,12 +586,12 @@ namespace Student.Controller
                         message = "Successfully saved personal info"
                     });
                 } 
-                // else if(details == null) {
-                //     return Ok(new {
-                //         code = 404,
-                //         message = "Invalid Account number provided"
-                //     });
-                // }
+                else if(details == null) {
+                    return Ok(new {
+                        code = 404,
+                        message = "Invalid Account number provided"
+                    });
+                }
                  else {
                     return Ok(new {
                         code = 404,

@@ -112,7 +112,35 @@ public class QuestionRepository : IQuestionRepository
 
         var data = await connection.QueryAsync<AnswerModel>("Get_answer", new { Id }, commandType: CommandType.StoredProcedure);
 
-        return data.First();
+        return data.FirstOrDefault();
+    }
+    public async Task<QuestionModel> GetExamQuestion(string Subject, string Class)
+    {
+        using var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+
+        var data = await connection.QueryAsync<QuestionModel>("Get_question_by_subject", new { Subject, Class }, commandType: CommandType.StoredProcedure);
+
+        return data.FirstOrDefault();
+    }
+    public async Task<Draft> GetDraft(string Id)
+    {
+        using var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+
+        var data = await connection.QueryAsync<Draft>("Get_draft", new { Id }, commandType: CommandType.StoredProcedure);
+
+        return data.FirstOrDefault();
+    }
+    public async Task SaveDraft(Draft payload)
+    {
+        using var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+
+        await connection.ExecuteAsync("Save_Draft", new { Id = payload.Id, Subjects = payload.Subjects, Answers = payload.Answers, Time = payload.Time }, commandType: CommandType.StoredProcedure);
+    }
+    public async Task UpdateDraft(Draft payload)
+    {
+        using var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+
+        await connection.ExecuteAsync("Update_Draft", new { Id = payload.Id, Subjects = payload.Subjects, Answers = payload.Answers, Time = payload.Time }, commandType: CommandType.StoredProcedure);
     }
     public async Task CompleteExam(string Id)
     {

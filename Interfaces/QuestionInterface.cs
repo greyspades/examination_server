@@ -20,5 +20,9 @@ namespace Question.Interface
         public Task<AnswerModel> GetAnswer(string Id);
         public Task MarkScore(string Id, string Subject, string scope);
         public Task CompleteExam(string Id);
+        public Task<QuestionModel> GetExamQuestion(string Subject, string Class);
+        public Task SaveDraft(Draft payload);
+        public Task UpdateDraft(Draft payload);
+        public Task<Draft> GetDraft(string Id);
     }
 }

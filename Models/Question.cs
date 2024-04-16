@@ -2,6 +2,13 @@ using Microsoft.Extensions.Options;
 
 namespace Question.Model;
 
+public class Draft {
+    public string? Id { get; set; }
+    public string? Subjects { get; set; }
+    public string? Answers { get; set; }
+    public string? Time { get; set; }
+}
+
 public class Option {
     public string? Id { get; set; }
     public string? Character { get; set; }

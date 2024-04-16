@@ -263,7 +263,7 @@ public class StudentRepository : IStudentRepository
                         hasFile = "No",
                         body = HTMLHelper.SendId(student.FirstName, student.Id),
                     };
-                    // await SendMail(mailObj, cred);
+                    await SendMail(mailObj, cred);
                 }
             }
         }

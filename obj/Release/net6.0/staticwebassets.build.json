@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "l5bgmo1Dk+GonF2nOYedwUJ9bid1zi/AqTH2n5eU7So=",
+  "Source": "SCHOLARSHIP",
+  "BasePath": "_content/SCHOLARSHIP",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "SCHOLARSHIP\\wwwroot",
+      "Source": "SCHOLARSHIP",
+      "ContentRoot": "C:\\Users\\LAPO Mfb\\development\\SCHOLARSHIP\\wwwroot\\",
+      "BasePath": "_content/SCHOLARSHIP",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\LAPO Mfb\\development\\SCHOLARSHIP\\wwwroot\\test.pdf",
+      "SourceId": "SCHOLARSHIP",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\LAPO Mfb\\development\\SCHOLARSHIP\\wwwroot\\",
+      "BasePath": "_content/SCHOLARSHIP",
+      "RelativePath": "test.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\test.pdf"
+    }
+  ]
+}
