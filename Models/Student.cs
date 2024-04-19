@@ -36,6 +36,8 @@ public class StudentAuth {
     public string? Id { get; set; }
     public string? Email { get; set; }
     public string? Password { get; set;}
+    public bool? Registered { get; set;}
+    public bool? Validated { get; set; }
 }
 
 public class EducationDto {

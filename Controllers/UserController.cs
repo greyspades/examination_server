@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using User.Models;
+using User.Interface;
 
 namespace User.Controller
 {
@@ -9,13 +10,15 @@ namespace User.Controller
     {
 
         private readonly ILogger<UserController> _logger;
+        private readonly IUserRepository _repo;
 
-        public UserController(ILogger<UserController> logger)
+        public UserController(ILogger<UserController> logger, IUserRepository repo)
         {
             _logger = logger;
+            _repo = repo;
         }
 
-        [HttpGet("login")]
+        [HttpPost("login")]
         public async Task Login(UserDto payload) {
             try {
 
@@ -23,6 +26,50 @@ namespace User.Controller
                 
             }
         }
-        
+        [HttpGet("/settings")]
+        public async Task<ActionResult> GetSettings() {
+            try {
+                var data = await _repo.GetSettings();
+
+                return Ok(new {
+                    code = 200,
+                    data
+                });
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+
+                var response = new
+                {
+                    code = 500,
+                    status = false,
+                    message = "Unnable to complete your request"
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+
+        [HttpPost("/settings")]
+        public async Task<ActionResult> SaveSettings(Settings payload) {
+            try {
+                await _repo.SaveSettings(payload);
+
+                return Ok(new {
+                    code = 200,
+                    message = "Settings saved successfuly"
+                });
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+
+                var response = new
+                {
+                    code = 500,
+                    status = false,
+                    message = "Unnable to complete your request"
+                };
+
+                return StatusCode(500, response);
+            }
+        }
     }
 }

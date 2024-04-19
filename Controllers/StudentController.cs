@@ -62,6 +62,7 @@ namespace Student.Controller
             try {
                 var duplicate = await _repo.CheckRegistration(payload);
                 var deadline = await _repo.GetSettings();
+                Console.WriteLine(deadline.Deadline);
                 if(deadline.Deadline < DateTime.Now) {
                     return Ok( new {
                         code = 400,
@@ -122,6 +123,15 @@ namespace Student.Controller
                 var user = await _repo.GetStudentByEmail(payload.Email);
                 var password = await _repo.GetPassword(user.First().Id);
                 var deadline = await _repo.GetSettings();
+    //   Console.WriteLine("user id is");
+    //             Console.WriteLine(user.First().Id);
+    //             Console.WriteLine("password is");
+    //             Console.WriteLine(password);
+
+    //             return Ok(new {
+    //                 code = 200,
+    //                 message = "did thing"
+    //             });
                 if(deadline.Deadline < DateTime.Now) {
                     return Ok( new {
                         code = 400,
@@ -134,7 +144,7 @@ namespace Student.Controller
                         message = "This user does not exist on the portal",
                     });
                 } else if(user.Any()
-                 && BC.Verify(payload.Password, password.First()) == true
+                 && BC.Verify(payload.Password, password) == true
                  ) {
                     var claims = new[]
             {
@@ -153,11 +163,12 @@ namespace Student.Controller
                return Ok(new {
                     code = 200,
                     message = "Logged in successfully",
+                    data = user.First(),
                     token = new JwtSecurityTokenHandler().WriteToken(token)
                });
                 } else {
                     return Ok(new {
-                        code = 500,
+                        code = 401,
                         message = "Wrong Email/Password"
                     });
                 }
@@ -1208,6 +1219,7 @@ namespace Student.Controller
                             id = item.subject,
                             name = item.name,
                             score = item.score,
+                            attempted = item.questionsAttempted
                         };
                         response.scores.Add(items);
                     }

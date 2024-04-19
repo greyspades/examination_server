@@ -500,7 +500,10 @@ namespace Question.Controller
                 var ans = await _repo.GetAnswer(answer.Question);
                 if(ans.Answer == answer.Value) {
                         await _repo.MarkScore(payload.Id, answer.Subject, payload.Class);
-                    }
+                }     
+                }
+                foreach(AnswerDto answer in payload.Answers) {
+                    await _repo.AddAttemptedQuestion(payload.Id, answer.Subject);
                 }
                 await _repo.CompleteExam(payload.Id);
                 return Ok(new {

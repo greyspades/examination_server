@@ -148,6 +148,12 @@ public class QuestionRepository : IQuestionRepository
 
         await connection.ExecuteAsync("Complete_exam", new { Id }, commandType: CommandType.StoredProcedure);
     }
+    public async Task AddAttemptedQuestion(string Id, string Subject)
+    {
+        using var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+
+        await connection.ExecuteAsync("Set_Questions_attempted", new { Id, Subject }, commandType: CommandType.StoredProcedure);
+    }
     public async Task MarkScore(string Id, string Subject, string Scope)
     {
         using var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));

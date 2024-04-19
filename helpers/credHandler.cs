@@ -41,8 +41,6 @@ public class CredHandler
 
             var credentials = await connection.QueryAsync<CredentialsObj>("Get_credentials", commandType: CommandType.StoredProcedure);
 
-            Console.WriteLine(credentials.First().AesKey);
-
             var token = credentials.FirstOrDefault().Token;
 
             var aesKey = credentials.FirstOrDefault().AesKey;
@@ -56,7 +54,7 @@ public class CredHandler
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
             var jsonObject = JObject.Parse(jsonResponse);
-            // Console.WriteLine(jsonObject);
+            Console.WriteLine(jsonObject);
 
             if (jsonObject.Value<int>("status") == 200)
             {

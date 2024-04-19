@@ -38,13 +38,13 @@ public class StudentRepository : IStudentRepository
 
         return data;
     }
-    public async Task<IEnumerable<string>> GetPassword(string Id)
+    public async Task<string> GetPassword(string Id)
     {
         using var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
 
         var data = await connection.QueryAsync<string>("Get_password", new { Id }, commandType: CommandType.StoredProcedure);
 
-        return data;
+        return data.First();
     }
     public async Task SavePersonalInfo(BasicInfo payload)
     {

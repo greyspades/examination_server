@@ -24,5 +24,6 @@ namespace Question.Interface
         public Task SaveDraft(Draft payload);
         public Task UpdateDraft(Draft payload);
         public Task<Draft> GetDraft(string Id);
+        public Task AddAttemptedQuestion(string Id, string Subject);
     }
 }

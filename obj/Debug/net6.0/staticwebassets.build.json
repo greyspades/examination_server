@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "l5bgmo1Dk+GonF2nOYedwUJ9bid1zi/AqTH2n5eU7So=",
+  "Hash": "cgcqaN07Gs5BenEd6cmgUwD1JW8+Xb4YggU3g0HFEuU=",
   "Source": "SCHOLARSHIP",
   "BasePath": "_content/SCHOLARSHIP",
   "Mode": "Default",
@@ -26,6 +26,8 @@
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",

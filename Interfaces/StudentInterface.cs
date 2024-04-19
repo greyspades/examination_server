@@ -25,7 +25,7 @@ namespace Student.Interface
         public Task DeleteEducationInfo(string id);
         public Task RegisterUser(StudentAuth payload);
         public Task<IEnumerable<StudentAuth>> CheckRegistration(StudentAuth payload);
-        public Task<IEnumerable<string>> GetPassword(string Id);
+        public Task<string> GetPassword(string Id);
         public Task<IEnumerable<BasicInfo>> GetPersonalInfo();
         public Task<IEnumerable<StudentAuth>> GetStudentByEmail(string email);
         public Task<IEnumerable<StudentData>> GetPendingVerifications();

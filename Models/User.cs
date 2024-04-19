@@ -7,4 +7,7 @@ public class UserDto {
 
 public class Settings {
     public DateTime? Deadline { get; set; }
+    public DateTime? ExamDate { get; set; }
+    public int? Duration { get; set; }
+    public string? ExamTime { get; set; }
 }
