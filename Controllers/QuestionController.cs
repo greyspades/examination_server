@@ -292,7 +292,7 @@ namespace Question.Controller
                 Console.WriteLine(payload.Class);
                 Console.WriteLine(payload.Subject);
                 Console.WriteLine(payload.Excel);
-                // await _repo.ParseQuestionFromExcell(payload.Excel, payload.Subject, payload.Class);
+                await _repo.ParseQuestionFromExcell(payload.Excel, payload.Subject, payload.Class);
 
                 return Ok(new {
                     code = 200,

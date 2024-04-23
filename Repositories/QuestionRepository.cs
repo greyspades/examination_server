@@ -182,6 +182,7 @@ public class QuestionRepository : IQuestionRepository
                 Console.WriteLine("got to excell");
                 for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
                 {
+                    Console.WriteLine(worksheet.Cells[row, 6].Value.ToString());
                     worksheet.Cells[row, 1].Value = Guid.NewGuid().ToString();
 
                     List<Option> options = new List<Option>{
@@ -221,8 +222,6 @@ public class QuestionRepository : IQuestionRepository
                     foreach(Option option in options) {
                         await connection.ExecuteAsync("Create_options", option, commandType: CommandType.StoredProcedure);
                     }
-
-                    // await connection.ExecuteAsync("Add_client", new {Branch = student.Branch, Id = student.Id, FirstName= student.FirstName, LastName=student.LastName, BUnion=student.BUnion, ClientId = student.ClientId,Email=student.Email,Phone=student.Phone, ProductType=student.ProductType,Sn = student.Sn, Zone= student.Zone}, commandType: CommandType.StoredProcedure);
                 }
             }
         }

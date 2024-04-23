@@ -36,7 +36,7 @@ namespace Student.Interface
         public Task SaveExcelFile(IFormFile file);
         public Task<IEnumerable<ExamDetails>> GetExamDetails(string Id);
         public Task<IEnumerable<dynamic>> GetDashboardDetails(string Id);
-        public Task<dynamic> GetAccountInfo(string accountNumber, CredentialsObj cred);
+        public Task<AccountInfo> GetAccountInfo(string accountNumber, CredentialsObj cred);
         public Task<CredentialsObj> GetCredentials();
         public Task<string> SendMail(EmailDto payload, CredentialsObj cred);
         public Task UpdateStatus(string Id, string Status);
@@ -45,6 +45,6 @@ namespace Student.Interface
         public Task<IEnumerable<dynamic>> GetScoresById(string Id);
         public Task<dynamic> GetApplicationInfo(string Id);
         public Task<dynamic> GetMetrics();
-        public Task<IEnumerable<dynamic>> GetAllScores(string Scope);
+        public Task<IEnumerable<dynamic>> GetAllScores(string scope);
     }
 }

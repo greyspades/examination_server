@@ -6,5 +6,6 @@ namespace User.Interface
     {
         public Task<Settings> GetSettings();
         public Task SaveSettings(Settings payload);
+        public Task<dynamic> AdminAuth(AdminDto payload);
     }
 }

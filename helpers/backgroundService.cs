@@ -37,13 +37,13 @@ public class TimedHostedService : BackgroundService
 
     private async void DoWork()
     {
-        var cred = new CredHandler(_config);
+        // var cred = new CredHandler(_config);
 
-        await cred.Renew();
+        // await cred.Renew();
         
-        using StreamWriter outputFile = new("tokenlogs.txt", true);
+        // using StreamWriter outputFile = new("tokenlogs.txt", true);
 
-        await outputFile.WriteAsync("background service running");
+        // await outputFile.WriteAsync("background service running");
 
         Console.WriteLine("job ran");
     }

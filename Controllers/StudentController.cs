@@ -14,6 +14,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using HTML;
+using Credentials.Models;
 
 namespace Student.Controller
 {
@@ -62,7 +64,6 @@ namespace Student.Controller
             try {
                 var duplicate = await _repo.CheckRegistration(payload);
                 var deadline = await _repo.GetSettings();
-                Console.WriteLine(deadline.Deadline);
                 if(deadline.Deadline < DateTime.Now) {
                     return Ok( new {
                         code = 400,
@@ -75,6 +76,17 @@ namespace Student.Controller
                         message = "You have already registered on the portal",
                     });
                 } else {
+                    CredentialsObj cred = await _repo.GetCredentials();
+
+                    var mailObj = new EmailDto
+                    {
+                        emailaddress = payload.Email,
+                        subject = "Scholarship Id",
+                        hasFile = "No",
+                        body = HTMLHelper.VerifyEmail("r34", payload.Id),
+                    };
+                    await _repo.SendMail(mailObj, cred);
+
                     payload.Password = BC.HashPassword(payload.Password.Trim());
 
                     await _repo.RegisterUser(payload);
@@ -574,14 +586,10 @@ namespace Student.Controller
                 return StatusCode(500, e.Message);
             }
         }
-
         [HttpPost("banking")]
-        // [Authorize]
         public async Task<ActionResult> AddBankingInfo(BankingInfo payload) {
             try {
                 var data = await _repo.GetBankingInfo(payload.Id);
-                CredentialsObj cred = await _repo.GetCredentials();
-                var details = await _repo.GetAccountInfo(payload.MpkAccNo, cred);
                 if(data.Any()) {
                     await _repo.UpdateBankingInfo(payload);
 
@@ -597,18 +605,56 @@ namespace Student.Controller
                         message = "Successfully saved personal info"
                     });
                 } 
-                else if(details == null) {
-                    return Ok(new {
-                        code = 404,
-                        message = "Invalid Account number provided"
-                    });
-                }
                  else {
                     return Ok(new {
                         code = 404,
                         message = "Couldnt process your request"
                     });
                 }
+
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+
+                using StreamWriter outputFile = new("logs.txt", true);
+
+                await outputFile.WriteAsync(e.Message);
+
+                var response = new
+                {
+                    code = 500,
+                    status = false,
+                    message = "Unnable to complete your request"
+                };
+
+                return StatusCode(500, e.Message);
+            }
+        }
+        [HttpPost("banking/verify")]
+        // [Authorize]
+        public async Task<ActionResult> VerifyBankingInfo(BankingInfo payload) {
+            try {
+                Console.WriteLine(payload.MpkAccNo);
+                CredentialsObj cred = await _repo.GetCredentials();
+                var details = await _repo.GetAccountInfo(payload.MpkAccNo, cred);
+                Console.WriteLine(details.account_name);
+
+                // if(details == null) {
+                //     return Ok(new {
+                //         code = 404,
+                //         message = "Invalid Account number provided"
+                //     });
+                // }
+                //  else {
+                //     Console.WriteLine(details);
+                //     return Ok(new {
+                //         code = 200,
+                //         data = details
+                //     });
+                // }
+                return Ok(new {
+                        code = 200,
+                        data = details
+                });
 
             } catch(Exception e) {
                 Console.WriteLine(e.Message);

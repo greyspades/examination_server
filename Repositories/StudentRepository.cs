@@ -423,19 +423,22 @@ public class StudentRepository : IStudentRepository
 
         await connection.ExecuteAsync("Update_status", new { Id, Status}, commandType: CommandType.StoredProcedure);
     }
-    public async Task<IEnumerable<dynamic>> GetAllScores(string Scope)
+    public async Task<IEnumerable<dynamic>> GetAllScores(string scope)
     {
         using var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
 
-        return await connection.QueryAsync<dynamic>("Get_all_scores", new { Scope }, commandType: CommandType.StoredProcedure);
+        return await connection.QueryAsync<dynamic>("Get_results_by_class", new { Class = scope }, commandType: CommandType.StoredProcedure);
     }
-    public async Task<dynamic> GetAccountInfo(string accountNumber, CredentialsObj cred)
+
+    public async Task<AccountInfo> GetAccountInfo(string accountNumber, CredentialsObj cred)
     {
 
         var content = JsonSerializer.Serialize(new
         {
             AccountNo = accountNumber
         });
+
+        Console.WriteLine(content);
 
         var encryptedBody = AEShandler.Encrypt(content, cred.AesKey, cred.AesIv);
 
@@ -462,6 +465,8 @@ public class StudentRepository : IStudentRepository
 
         var jsonData = JObject.Parse(jsonResponse);
 
+        Console.WriteLine(jsonData);
+
         if (jsonData.Value<string>("status") == "200")
         {
             byte[] stringBytes = Convert.FromHexString(jsonData.Value<string>("data"));
@@ -471,6 +476,8 @@ public class StudentRepository : IStudentRepository
             var decrypted = AEShandler.Decrypt(bytes64, cred.AesKey, cred.AesIv);
 
             var data = JsonSerializer.Deserialize<AccountInfo>(decrypted);
+
+            Console.WriteLine(data);
 
             return data;
         }

@@ -11,3 +11,8 @@ public class Settings {
     public int? Duration { get; set; }
     public string? ExamTime { get; set; }
 }
+
+public class AdminDto {
+    public string? Id { get; set; }
+    public string? Password { get; set; }
+}

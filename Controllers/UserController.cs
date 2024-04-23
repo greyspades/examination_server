@@ -17,15 +17,6 @@ namespace User.Controller
             _logger = logger;
             _repo = repo;
         }
-
-        [HttpPost("login")]
-        public async Task Login(UserDto payload) {
-            try {
-
-            } catch(Exception e) {
-                
-            }
-        }
         [HttpGet("/settings")]
         public async Task<ActionResult> GetSettings() {
             try {
@@ -57,6 +48,29 @@ namespace User.Controller
                 return Ok(new {
                     code = 200,
                     message = "Settings saved successfuly"
+                });
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+
+                var response = new
+                {
+                    code = 500,
+                    status = false,
+                    message = "Unnable to complete your request"
+                };
+
+                return StatusCode(500, response);
+            }
+        }
+
+        [HttpPost("/auth")]
+        public async Task<ActionResult> Authenticate(AdminDto payload) {
+            try {
+                var data = await _repo.AdminAuth(payload);
+
+                return Ok(new {
+                    code = 200,
+                    data
                 });
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
