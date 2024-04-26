@@ -1,4 +1,5 @@
 using Question.Model;
+using Student.Models;
 
 namespace Question.Interface
 {
@@ -10,7 +11,7 @@ namespace Question.Interface
         public Task<IEnumerable<QuestionBank>> GetBanks();
         public Task CreateSubject(Subject payload);
         public Task<IEnumerable<Subject>> GetSubjects(string scope);
-        public Task<IEnumerable<dynamic>> GetQuestions(string subject);
+        public Task<IEnumerable<dynamic>> GetQuestions(string subject, string scope);
         public Task UpdateQuestion(QuestionModel payload);
         public Task UpdateOption(Option payload);
         public Task DeleteOptions(string Id);
@@ -25,5 +26,6 @@ namespace Question.Interface
         public Task UpdateDraft(Draft payload);
         public Task<Draft> GetDraft(string Id);
         public Task AddAttemptedQuestion(string Id, string Subject);
+        public Task<StudentData> GetStudentById(string id);
     }
 }

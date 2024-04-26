@@ -40,6 +40,12 @@ public class StudentAuth {
     public bool? Validated { get; set; }
 }
 
+public class ResultsDto {
+    public string? Scope { get; set; }
+    public int? Page { get; set; }
+    public string? SearchVal { get; set; }
+}
+
 public class EducationDto {
     public List<EducationInfo>? Data { get; set; }
 }
@@ -75,6 +81,7 @@ public class StudentData {
     public bool? Approved { get; set; }
     public string? Status { get; set; }
     public string? ExamId { get; set; }
+    public bool? TakenExam { get; set; }
 }
 
 public class Documents {

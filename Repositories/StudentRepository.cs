@@ -435,7 +435,7 @@ public class StudentRepository : IStudentRepository
 
         var content = JsonSerializer.Serialize(new
         {
-            AccountNo = accountNumber
+            accountNo = accountNumber
         });
 
         Console.WriteLine(content);
@@ -445,6 +445,8 @@ public class StudentRepository : IStudentRepository
         byte[] bytes = Convert.FromBase64String(encryptedBody);
 
         string hexString = BitConverter.ToString(bytes).Replace("-", "").ToLower();
+
+        Console.WriteLine(hexString);
 
         var stringifiedBody = JsonSerializer.Serialize(new
         {

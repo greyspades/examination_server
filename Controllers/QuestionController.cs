@@ -87,7 +87,7 @@ namespace Question.Controller
         [HttpPost("get_exam/question")]
         public async Task<ActionResult> GetExamQuestion(ExamDTO payload) {
                 try {
-                 var questions = await _repo.GetQuestions(payload.Subject);
+                 var questions = await _repo.GetQuestions(payload.Subject, payload.Scope);
 
                  List<dynamic> questionList = questions.ToList();
 
@@ -154,21 +154,21 @@ namespace Question.Controller
             }
         }
 
-        [HttpGet("question/subject/{subject}")]
-        public async Task<ActionResult> GetQuestions(string subject) {
+        [HttpGet("question/subject/{subject}/{scope}")]
+        public async Task<ActionResult> GetQuestions(string subject, string scope) {
             try {
-                var data = await _repo.GetQuestions(subject);
-
-                foreach(var question in data) {
+                var data = await _repo.GetQuestions(subject, scope);
+                if(data.Any()) {
+                    foreach(var question in data) {
                     string[] optionsArr = question.options.Split(",");
                     string[] charactersArr = question.characters.Split(",");
                     List<dynamic> options = new();
-                    for(int i = 0; i< optionsArr.Length; i++) {
+                    for(int i = 0; i <= 3; i++) {
                         options.Add(new {Character = charactersArr[i], Value = optionsArr[i]});
                     }
                     question.options = options;
                 }
-
+                }
                 return Ok(new {
                     code = 200,
                     data
@@ -496,8 +496,13 @@ namespace Question.Controller
         [HttpPost("Submit")]
         public async Task<ActionResult<IEnumerable<QuestionBank>>> SubmitAnswers(AnswersDto payload) {
             try {
-                foreach(AnswerDto answer in payload.Answers) {
+                var client = await _repo.GetStudentById(payload.Id);
+                if(client.TakenExam == false) {
+                    foreach(AnswerDto answer in payload.Answers) {
                 var ans = await _repo.GetAnswer(answer.Question);
+                // Console.WriteLine(payload.Class);
+                // Console.WriteLine(answer.Question);
+                // Console.WriteLine(answer.Value);
                 if(ans.Answer == answer.Value) {
                         await _repo.MarkScore(payload.Id, answer.Subject, payload.Class);
                 }     
@@ -510,6 +515,12 @@ namespace Question.Controller
                     code = 200,
                     message = "Exam completed successfully"
                 });
+                } else {
+                    return Ok(new {
+                    code = 400,
+                    message = "You have already taken this exam"
+                });
+                }
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
 

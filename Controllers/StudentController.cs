@@ -85,7 +85,7 @@ namespace Student.Controller
                         hasFile = "No",
                         body = HTMLHelper.VerifyEmail("r34", payload.Id),
                     };
-                    await _repo.SendMail(mailObj, cred);
+                    // await _repo.SendMail(mailObj, cred);
 
                     payload.Password = BC.HashPassword(payload.Password.Trim());
 
@@ -1221,10 +1221,21 @@ namespace Student.Controller
             }
         }
 
-        [HttpGet("scores/all/{scope}")]
-        public async Task<ActionResult<IEnumerable<ExamDetails>>> GetAllScores(string scope) {
+        [HttpPost("scores/all")]
+        public async Task<ActionResult<IEnumerable<ExamDetails>>> GetAllScores(ResultsDto payload) {
             try {
-                var data = await _repo.GetAllScores(scope);
+                var count = payload.Page * 10;
+
+                var data = await _repo.GetAllScores(payload.Scope);
+
+                if(payload.SearchVal == "firstname") {
+                    data = data.Where((item) => item.FirstName.ToLower().Contains(payload.SearchVal.ToLower())).ToList();
+                }
+                if(payload.SearchVal == "lastname") {
+                    data = data.Where((item) => item.LastName.ToLower().Contains(payload.SearchVal.ToLower())).ToList();
+                }
+
+                var slicedList = data.Skip((int)count).Take(count: 20);
 
                 return Ok( new {
                     code = 200,

@@ -17,6 +17,7 @@ public class Option {
 public class ExamDTO {
     public string? Subject { get; set; }
     public int? Number { get; set; }
+    public string? Scope { get; set; }
 }
 public class ExamQuestion {
     public string? StudentId { get; set; }

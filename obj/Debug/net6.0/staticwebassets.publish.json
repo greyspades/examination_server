@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "1Niu+7VfHHnRGUZM6WaTeblXcL69wRxEos7jmsWrIZI=",
+  "Source": "SCHOLARSHIP",
+  "BasePath": "_content/SCHOLARSHIP",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "SCHOLARSHIP\\wwwroot",
+      "Source": "SCHOLARSHIP",
+      "ContentRoot": "C:\\Users\\LAPO Mfb\\development\\SCHOLARSHIP\\wwwroot\\",
+      "BasePath": "_content/SCHOLARSHIP",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\LAPO Mfb\\development\\SCHOLARSHIP\\wwwroot\\test.pdf",
+      "SourceId": "SCHOLARSHIP",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\LAPO Mfb\\development\\SCHOLARSHIP\\wwwroot\\",
+      "BasePath": "_content/SCHOLARSHIP",
+      "RelativePath": "test.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\test.pdf"
+    }
+  ]
+}

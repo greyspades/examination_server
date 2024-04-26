@@ -85,3 +85,4 @@ C:\Users\LAPO Mfb\development\SCHOLARSHIP\obj\Debug\net6.0\SCHOLARSHIP.genruntim
 C:\Users\LAPO Mfb\development\SCHOLARSHIP\obj\Debug\net6.0\ref\SCHOLARSHIP.dll
 C:\Users\LAPO Mfb\development\SCHOLARSHIP\obj\Debug\net6.0\SCHOLARSHIP.sourcelink.json
 C:\Users\LAPO Mfb\development\SCHOLARSHIP\obj\Debug\net6.0\SCHOLARS.D24494F7.Up2Date
+C:\Users\LAPO Mfb\development\SCHOLARSHIP\bin\Debug\net6.0\appsettings.Production.json

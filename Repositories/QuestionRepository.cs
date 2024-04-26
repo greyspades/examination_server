@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 using Question.Interface;
 using Question.Model;
 using OfficeOpenXml;
-
+using Student.Models;
 namespace Question.Repository;
 
 public class QuestionRepository : IQuestionRepository
@@ -62,11 +62,20 @@ public class QuestionRepository : IQuestionRepository
     
         return data;
     }
-        public async Task<IEnumerable<dynamic>> GetQuestions(string subject)
+
+    public async Task<StudentData> GetStudentById(string id)
     {
         using var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
 
-       var data = await connection.QueryAsync<dynamic>("Get_questions_by_subject", new { Subject = subject }, commandType: CommandType.StoredProcedure);
+        var data = await connection.QueryAsync<StudentData>("Get_student_by_id", new { Id = id }, commandType: CommandType.StoredProcedure);
+
+        return data.First();
+    }
+        public async Task<IEnumerable<dynamic>> GetQuestions(string subject, string scope)
+    {
+        using var connection = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+
+       var data = await connection.QueryAsync<dynamic>("Get_questions_by_subject", new { Subject = subject, Class = scope }, commandType: CommandType.StoredProcedure);
     
         return data;
     }

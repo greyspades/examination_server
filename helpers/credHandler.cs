@@ -54,7 +54,6 @@ public class CredHandler
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
             var jsonObject = JObject.Parse(jsonResponse);
-            Console.WriteLine(jsonObject);
 
             if (jsonObject.Value<int>("status") == 200)
             {
